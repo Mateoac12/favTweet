@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@algolia/autocomplete-core": "1.5.3",
+    "@headlessui/react": "1.5.0",
+    "firebase": "9.6.9",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "wouter": "2.8.0-alpha.2"
