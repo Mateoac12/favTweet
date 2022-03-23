@@ -1,6 +1,7 @@
 import type { ITargetTweet } from '../../types'
 import { generateExternalTwitterLink } from '../../utils/generateExternalTwitterLink'
 import { getDateFormat } from '../../utils/getDateFormat'
+import Avatar from '../Avatar'
 import ProtectedIcon from '../ProtectedIcon'
 import Underline from '../Underline'
 import VerifiedIcon from '../VerifiedIcon'
@@ -25,7 +26,7 @@ const TargetTweet = ({
         {getDateFormat(createdAt)}
       </span>
       <figure className="flex gap-2 items-start">
-        <img className="rounded-full" src={avatar} alt={username} />
+        <Avatar src={avatar} alt={username} />
         <figcaption>
           <div className="flex items-center gap-1">
             <h2 className="text-xl">{name}</h2>
