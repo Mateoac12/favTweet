@@ -13,8 +13,14 @@ export interface ITargetTweet {
   createdAt: string
 }
 
+export interface IUserProfile {
+  displayName: string | null
+  photoURL: string | null
+  uid: string
+}
+
 export interface IconPropsSVG {
-  color?: 'sky' | 'indigo' | 'slate'
+  color?: 'sky' | 'indigo' | 'slate' | 'white'
   w?: number
   h?: number
 }
