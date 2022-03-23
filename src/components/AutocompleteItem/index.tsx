@@ -1,5 +1,6 @@
 import { ITargetTweet } from '../../types'
 import { generateExternalTwitterLink } from '../../utils/generateExternalTwitterLink'
+import Avatar from '../Avatar'
 
 interface Props extends ITargetTweet {}
 
@@ -12,7 +13,7 @@ const AutocompleteItem = ({ name, username, text, avatar, tweetId }: Props) => {
       rel="noreferrer"
     >
       <div className="flex items-center gap-2 pr-2">
-        <img className="rounded-full" src={avatar} alt={username + ' avatar'} />
+        <Avatar src={avatar} alt={username + ' avatar'} />
         <div>
           <p className="text-xl">{name}</p>
           <p className="text-slate-600">@{username}</p>
