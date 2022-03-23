@@ -1,4 +1,5 @@
-import { useMemo, useRef, useState } from 'react'
+import { Fragment, useMemo, useRef, useState } from 'react'
+import { Transition } from '@headlessui/react'
 import {
   AutocompleteCollection,
   BaseItem,
@@ -63,26 +64,37 @@ const Search = ({ data, sourceSearchId }: Props) => {
           {...(inputProps as any)}
         />
         {autocompleteState.isOpen && (
-          <div
-            className="absolute top-full left-0 z-10 bg-white/90 p-2 rounded-lg backdrop-blur shadow-2xl shadow-slate-300"
-            ref={panelRef}
-            {...(autocomplete.getPanelProps() as any)}
+          <Transition
+            show={autocompleteState.isOpen}
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
           >
-            {autocompleteState.collections.map(({ items }, index) => (
-              <section key={`collection-${index}`}>
-                {items.length > 0 && (
-                  <ul {...autocomplete.getListProps()}>
-                    {items.map((item) => (
-                      <AutocompleteItem
-                        key={`listitem-${item.tweetId}`}
-                        {...(item as any)}
-                      />
-                    ))}
-                  </ul>
-                )}
-              </section>
-            ))}
-          </div>
+            <div
+              className="absolute origin-top top-full left-0 z-10 bg-white/90 p-2 rounded-lg backdrop-blur shadow-2xl shadow-slate-300"
+              ref={panelRef}
+              {...(autocomplete.getPanelProps() as any)}
+            >
+              {autocompleteState.collections.map(({ items }, index) => (
+                <section key={`collection-${index}`}>
+                  {items.length > 0 && (
+                    <ul {...autocomplete.getListProps()}>
+                      {items.map((item) => (
+                        <AutocompleteItem
+                          key={`listitem-${item.tweetId}`}
+                          {...(item as any)}
+                        />
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              ))}
+            </div>
+          </Transition>
         )}
       </div>
     </form>
