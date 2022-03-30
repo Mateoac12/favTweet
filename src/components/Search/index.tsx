@@ -1,5 +1,4 @@
-import { Fragment, useMemo, useRef, useState } from 'react'
-import { Transition } from '@headlessui/react'
+import { useMemo, useRef, useState } from 'react'
 import {
   AutocompleteCollection,
   BaseItem,
@@ -7,6 +6,7 @@ import {
 } from '@algolia/autocomplete-core'
 import { ITargetTweet } from '../../types'
 import AutocompleteItem from '../AutocompleteItem'
+import Transition from '../Transition'
 
 interface Props {
   data: ITargetTweet[]
@@ -64,16 +64,7 @@ const Search = ({ data, sourceSearchId }: Props) => {
           {...(inputProps as any)}
         />
         {autocompleteState.isOpen && (
-          <Transition
-            show={autocompleteState.isOpen}
-            as={Fragment}
-            enter="transition ease-out duration-100"
-            enterFrom="transform opacity-0 scale-95"
-            enterTo="transform opacity-100 scale-100"
-            leave="transition ease-in duration-75"
-            leaveFrom="transform opacity-100 scale-100"
-            leaveTo="transform opacity-0 scale-95"
-          >
+          <Transition show={autocompleteState.isOpen}>
             <div
               className="absolute origin-top top-full left-0 z-10 bg-white/90 p-2 rounded-lg backdrop-blur shadow-2xl shadow-slate-300"
               ref={panelRef}
