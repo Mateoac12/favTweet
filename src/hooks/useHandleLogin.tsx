@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { UserContext } from '../context/UserContext'
 import { onAuthStateChanged, signIn, signOut } from '../firebase'
-import { IUserProfile } from '../types'
 
 export const useHandleLogin = () => {
-  const [user, setUser] = useState<IUserProfile | null>(null)
+  const { user, setUser } = useContext(UserContext)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const handleLogin = () => {
@@ -21,6 +21,7 @@ export const useHandleLogin = () => {
 
   useEffect(() => {
     onAuthStateChanged((user) => {
+      localStorage.setItem('user', JSON.stringify(user))
       setUser(user)
       setIsLoading(false)
     })
