@@ -19,13 +19,20 @@ const TargetTweet = ({
   tweetId,
   text,
   createdAt,
+  notHover = false,
 }: ITargetTweet) => {
   return (
-    <article className="bg-white/60 px-2 py-4 mb-4 rounded-lg block break-inside relative max-w-md hover:bg-white/80 shadow-none transition hover:shadow-slate-200 hover:shadow-2xl overflow-hidden">
-      <span className="absolute text-xs px-2 py-1 bg-white/80 rounded-lg top-2 right-2">
+    <article
+      className={`bg-white/60 px-2 py-4 mb-4 rounded-lg block break-inside relative max-w-md  shadow-none transition overflow-hidden ${
+        notHover
+          ? 'hover:bg-white/80 hover:shadow-slate-200 hover:shadow-2xl'
+          : ''
+      }`}
+    >
+      <span className="absolute px-2 py-1 text-xs rounded-lg bg-white/80 top-2 right-2">
         {getDateFormat(createdAt)}
       </span>
-      <figure className="flex gap-2 items-start">
+      <figure className="flex items-start gap-2">
         <Avatar src={avatar} alt={username} />
         <figcaption>
           <div className="flex items-center gap-1">
@@ -36,8 +43,8 @@ const TargetTweet = ({
           <p className="text-slate-600">@{username}</p>
         </figcaption>
       </figure>
-      <p className="whitespace-pre-line my-4">{text}</p>
-      <div className="w-max rounded-md ml-auto text-sky-600">
+      <p className="my-4 whitespace-pre-line">{text}</p>
+      <div className="ml-auto rounded-md w-max text-sky-600">
         <a
           href={generateExternalTwitterLink({ username, tweetId })}
           rel="noreferrer"
