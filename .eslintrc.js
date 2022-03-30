@@ -22,5 +22,6 @@ module.exports = {
   plugins: ['react', '@typescript-eslint'],
   rules: {
     'react/react-in-jsx-scope': RULES.OFF,
+    camelcase: RULES.OFF,
   },
 }
