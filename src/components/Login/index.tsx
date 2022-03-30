@@ -1,8 +1,11 @@
-import { Menu, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Menu } from '@headlessui/react'
 import { useHandleLogin } from '../../hooks/useHandleLogin'
+import ArrowBottomIcon from '../ArrowBottomIcon'
 import Avatar from '../Avatar'
+import Button from '../Button'
+import LogoutIcon from '../LogoutIcon'
 import Placeholder from '../Placeholder'
+import Transition from '../Transition'
 import TwitterLogoIcon from '../TwitterLogoIcon'
 
 const Login = () => {
@@ -22,23 +25,19 @@ const Login = () => {
         <Menu>
           <Menu.Button className="flex items-center gap-2 relative">
             <Avatar src={user.photoURL!} alt={user.displayName!} size={'w-8'} />
-            <span className="text-lg font-semibold">{user.displayName!}</span>
+            <span className="flex items-center gap-1 text-lg font-semibold">
+              {user.displayName!}
+              <ArrowBottomIcon />
+            </span>
           </Menu.Button>
-          <Transition
-            as={Fragment}
-            enter="transition ease-out duration-100"
-            enterFrom="transform opacity-0 scale-95"
-            enterTo="transform opacity-100 scale-100"
-            leave="transition ease-in duration-75"
-            leaveFrom="transform opacity-100 scale-100"
-            leaveTo="transform opacity-0 scale-95"
-          >
+          <Transition>
             <Menu.Items className="absolute top-full right-0 w-56 mt-2 p-2 origin-top-right bg-white/90 backdrop-blur rounded-md shadow-2xl shadow-slate-300 focus:outline-none">
               <Menu.Item>
                 <button
                   onClick={handleLogout}
-                  className="w-full text-right px-4 py-2 rounded-md text-lg bg-transparent hover:bg-slate-200/40 transition-colors"
+                  className="flex justify-between items-center w-full text-right px-4 py-2 rounded-md text-lg bg-transparent hover:bg-slate-200/40 transition-colors"
                 >
+                  <LogoutIcon />
                   Cerrar sesión
                 </button>
               </Menu.Item>
@@ -46,13 +45,9 @@ const Login = () => {
           </Transition>
         </Menu>
       ) : (
-        <button
-          className="bg-sky-500 text-white font-bold px-4 py-1 rounded-full text-lg inline-flex items-center gap-2"
-          onClick={handleLogin}
-        >
-          <TwitterLogoIcon />
+        <Button onClick={handleLogin} icon={<TwitterLogoIcon />} type="twitter">
           Iniciar
-        </button>
+        </Button>
       )}
     </>
   )
