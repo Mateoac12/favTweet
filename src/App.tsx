@@ -1,16 +1,20 @@
 import Circles from './components/Circles'
 import Header from './components/Header'
-import { PublicRoutes } from './routes/index.routes'
+import TweetsProvider from './context/TweetsContext'
+import UserProvider from './context/UserContext'
+import { Routes } from './routes/index.routes'
 
 function App() {
   return (
-    <>
-      <Header />
-      <Circles />
-      <div className="max-w-screen-xl mx-auto min-h-screen">
-        <PublicRoutes />
-      </div>
-    </>
+    <UserProvider>
+      <TweetsProvider>
+        <Header />
+        <Circles />
+        <div className="max-w-screen-xl min-h-screen mx-auto">
+          <Routes />
+        </div>
+      </TweetsProvider>
+    </UserProvider>
   )
 }
 
