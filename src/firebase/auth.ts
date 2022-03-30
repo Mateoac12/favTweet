@@ -22,11 +22,13 @@ const onAuthStateChanged = (onChange: (value: IUserProfile | null) => void) =>
 function getUserData(user: User | null): IUserProfile | null {
   if (!user) return null
 
-  const { displayName, photoURL, uid } = user
+  const { displayName, photoURL, uid, accessToken } = user
+
   const userData = {
     displayName,
     photoURL,
     uid,
+    accessToken,
   }
   return userData
 }
