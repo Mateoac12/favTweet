@@ -1,6 +1,6 @@
 import { ChangeEvent, useContext, useState } from 'react'
 import { TweetsContext } from '../context/TweetsContext'
-import { getTweet } from '../services/getTweet'
+import { postTweet } from '../services/getTweet'
 import { checkTweetLink } from '../utils/checkTweetLink'
 import { useError } from './useError'
 
@@ -27,7 +27,7 @@ export const useTweet = () => {
     resetError()
 
     setIsLoading(true)
-    const { tweetData } = await getTweet({ tweetId } as { tweetId: string })
+    const { tweetData } = await postTweet({ tweetId } as { tweetId: string })
 
     setTweet(tweetData)
     tweetData && setIsLoading(false)
