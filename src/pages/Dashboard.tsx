@@ -1,23 +1,41 @@
-import Underline from '../components/Underline'
-import nonTweetIcon from '../assets/non-tweet.png'
-import Title from '../components/Title'
-import AddTweetPanel from '../components/AddTweetPanel'
+import { useEffect, useState } from 'react'
+import TargetTweet from '../components/TargetTweet'
+import { getTweets } from '../firebase/firestore'
+import { useHandleLogin } from '../hooks/useHandleLogin'
+import { ITargetTweet } from '../types'
+import NonTweets from './NonTweets'
 
 const Dashboard = () => {
-  return (
-    <div className="pt-28">
-      <Title>
-        Panel de <Underline color="indigo">tweets</Underline>
-      </Title>
-      <section className="min-h-screen flex flex-col justify-center items-center -mt-28">
-        <img className="w-80 mx-auto" src={nonTweetIcon} />
-        <p className="text-4xl mt-12 mb-8  font-semibold text-slate-600">
-          No hay tweets! Puedes agregarlos aquí
-        </p>
-        <AddTweetPanel />
-      </section>
-    </div>
-  )
+  const [tweets, setTweets] = useState<ITargetTweet[]>([])
+  const [loader, setLoader] = useState<boolean>(true)
+  const { user } = useHandleLogin()
+
+  useEffect(() => {
+    getTweets(user?.uid!, (results: ITargetTweet[]) => {
+      setTweets(results)
+      setLoader(false)
+    })
+  }, [])
+
+  if (loader)
+    return (
+      <div className="absolute mt-28">
+        <h1>loading</h1>
+      </div>
+    )
+
+  if (tweets.length > 0)
+    return (
+      <div className="absolute mt-28">
+        <section className="my-4 mb-12 masonry sm:masonry-sm md:masonry-md">
+          {tweets.map((tweet) => (
+            <TargetTweet key={`target-dashboard-${tweet.tweetId}`} {...tweet} />
+          ))}
+        </section>
+      </div>
+    )
+
+  return <NonTweets />
 }
 
 export default Dashboard
