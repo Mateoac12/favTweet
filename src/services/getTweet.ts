@@ -4,7 +4,7 @@ interface Props {
   tweetId: string
 }
 
-export const getTweet = async ({ tweetId }: Props) => {
+export const postTweet = async ({ tweetId }: Props) => {
   const url = import.meta.env.VITE_SERVICE_GET_TWEET as string
 
   const tweetData: ITargetTweet = await fetch(url, {
