@@ -2,6 +2,7 @@ import type { ITargetTweet } from '../../types'
 import { generateExternalTwitterLink } from '../../utils/generateExternalTwitterLink'
 import { getDateFormat } from '../../utils/getDateFormat'
 import Avatar from '../Avatar'
+import Pill from '../Pill'
 import ProtectedIcon from '../ProtectedIcon'
 import Underline from '../Underline'
 import VerifiedIcon from '../VerifiedIcon'
@@ -19,6 +20,7 @@ const TargetTweet = ({
   tweetId,
   text,
   createdAt,
+  category,
   notHover = false,
 }: ITargetTweet) => {
   return (
@@ -44,7 +46,18 @@ const TargetTweet = ({
         </figcaption>
       </figure>
       <p className="my-4 whitespace-pre-line">{text}</p>
-      <div className="ml-auto rounded-md w-max text-sky-600">
+      <div
+        className={`ml-auto rounded-md text-sky-600 ${
+          category?.length! > 0 ? 'flex w-full items-center' : 'w-max'
+        }`}
+      >
+        {category?.length! > 0 && (
+          <div className="flex flex-wrap flex-1 gap-2">
+            {category?.map((c) => (
+              <Pill key={c}>{c}</Pill>
+            ))}
+          </div>
+        )}
         <a
           href={generateExternalTwitterLink({ username, tweetId })}
           rel="noreferrer"
