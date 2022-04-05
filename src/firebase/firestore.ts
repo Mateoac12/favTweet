@@ -3,13 +3,17 @@ import {
   collection,
   addDoc,
   onSnapshot,
+  Timestamp,
 } from 'firebase/firestore'
 import { ITargetTweet, IUserProfile } from '../types'
 
 const db = getFirestore()
 
 const addTweet = async (tweet: ITargetTweet, userId: IUserProfile['uid']) => {
-  const newTweet = await addDoc(collection(db, `${userId}`), tweet)
+  const newTweet = await addDoc(collection(db, `${userId}`), {
+    ...tweet,
+    date: Timestamp.fromDate(new Date()),
+  })
   return newTweet
 }
 
