@@ -1,3 +1,5 @@
+import { Timestamp } from 'firebase/firestore'
+
 interface TweetData {
   in_reply_to_user_id: string
   conversation_id: string
@@ -9,6 +11,7 @@ interface TweetData {
   }[]
   text: string
   author_id: string
+  date?: Timestamp
 }
 
 export interface ITweetAPI {
