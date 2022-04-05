@@ -1,11 +1,11 @@
 import { ChangeEvent, useContext, useState } from 'react'
-import { TweetsContext } from '../context/TweetsContext'
+import { TweetContext } from '../context/TweetContext'
 import { postTweet } from '../services/getTweet'
 import { checkTweetLink } from '../utils/checkTweetLink'
 import { useError } from './useError'
 
 export const useTweet = () => {
-  const { tweet, setTweet } = useContext(TweetsContext)
+  const { tweet, setTweet } = useContext(TweetContext)
   const [input, setInput] = useState<string>('')
   const { error, setError, resetError } = useError()
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -42,11 +42,16 @@ export const useTweet = () => {
     }))
   }
 
+  const resetTweet = () => {
+    setTweet(null)
+  }
+
   return {
     input,
     error,
     isLoading,
     tweet,
+    resetTweet,
     handleSetInput,
     handleCheckLink,
     setCategory,
