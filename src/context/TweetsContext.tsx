@@ -11,18 +11,23 @@ interface Props {
   children: ReactNode | ReactNode[]
 }
 
-interface ITweetContext {
-  tweet: ITargetTweet | null
-  setTweet: Dispatch<SetStateAction<ITargetTweet | null>>
+interface ITweetsContext {
+  tweets: ITargetTweet[] | null
+  setTweets: Dispatch<SetStateAction<ITargetTweet[] | null>>
+  filteredTweets: ITargetTweet[]
+  setFilteredTweets: Dispatch<SetStateAction<ITargetTweet[]>>
 }
 
-export const TweetsContext = createContext<ITweetContext>({} as ITweetContext)
+export const TweetsContext = createContext<ITweetsContext>({} as ITweetsContext)
 
 const TweetsProvider = ({ children }: Props) => {
-  const [tweet, setTweet] = useState<ITargetTweet | null>(null)
+  const [tweets, setTweets] = useState<ITargetTweet[] | null>([])
+  const [filteredTweets, setFilteredTweets] = useState<ITargetTweet[]>(tweets!)
 
   return (
-    <TweetsContext.Provider value={{ tweet, setTweet }}>
+    <TweetsContext.Provider
+      value={{ tweets, setTweets, filteredTweets, setFilteredTweets }}
+    >
       {children}
     </TweetsContext.Provider>
   )
