@@ -9,7 +9,7 @@ const NonTweets = () => {
         <p className="mt-12 mb-8 text-4xl font-semibold text-slate-600">
           No hay tweets! Puedes agregarlos aquí
         </p>
-        <AddTweetPanel />
+        <AddTweetPanel existCategories={[]} />
       </section>
     </div>
   )
