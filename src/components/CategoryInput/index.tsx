@@ -9,7 +9,7 @@ interface Props {
   existCategories: string[]
 }
 
-const CategoryInput = ({ existCategories }: Props) => {
+const CategoryInput = ({ existCategories = [] }: Props) => {
   const [input, setInput] = useState<string>('')
   const [categories, setCategories] = useState<string[]>([])
   const { setCategory } = useTweet()
