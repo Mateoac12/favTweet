@@ -24,10 +24,10 @@ const Search = ({ data, sourceSearchId }: Props) => {
       createAutocomplete({
         placeholder: '¿En cual estabas pensando?',
         onStateChange: ({ state }) => setAutocompleteState(state),
-        getSources: () => [
+        getSources: (): any => [
           {
             sourceId: sourceSearchId,
-            getItems: ({ query }) => {
+            getItems: ({ query }: { query: string }) => {
               if (query) {
                 return data.filter(
                   ({ text, username, name }) =>
@@ -59,14 +59,14 @@ const Search = ({ data, sourceSearchId }: Props) => {
     <form ref={formRef} {...(formProps as any)}>
       <div className="relative">
         <input
-          className="w-full text-xl px-4 py-2 rounded-lg my-4 focus:ring-4 focus:ring-indigo-300 transition focus:outline-none"
+          className="w-full px-4 py-2 my-4 text-xl transition rounded-lg focus:ring-4 focus:ring-indigo-300 focus:outline-none"
           ref={inputRef}
           {...(inputProps as any)}
         />
         {autocompleteState.isOpen && (
           <Transition show={autocompleteState.isOpen}>
             <div
-              className="absolute origin-top top-full left-0 z-10 bg-white/90 p-2 rounded-lg backdrop-blur shadow-2xl shadow-slate-300"
+              className="absolute left-0 z-10 p-2 origin-top rounded-lg shadow-2xl top-full bg-white/90 backdrop-blur shadow-slate-300"
               ref={panelRef}
               {...(autocomplete.getPanelProps() as any)}
             >
