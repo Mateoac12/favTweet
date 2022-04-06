@@ -17,15 +17,18 @@ interface Props {
 
 const AddTweetPanel = ({ existCategories }: Props) => {
   const { user } = useHandleLogin()
-  const { input, handleSetInput, handleCheckLink, isLoading, error, tweet } =
-    useTweet()
+  const {
+    error,
+    handleCheckLink,
+    handleSetInput,
+    input,
+    isLoading,
+    resetTweet,
+    tweet,
+  } = useTweet()
 
   const handleSubmitTweet = async () => {
-    const tweetDataAPI = await addTweet(
-      { ...tweet } as ITargetTweet,
-      user?.uid!
-    )
-    console.log(tweetDataAPI)
+    await addTweet({ ...tweet } as ITargetTweet, user?.uid!)
   }
 
   return (
@@ -76,6 +79,7 @@ const AddTweetPanel = ({ existCategories }: Props) => {
                       onClick={() => {
                         handleSubmitTweet()
                         close()
+                        resetTweet()
                       }}
                     >
                       Guardar tweet
