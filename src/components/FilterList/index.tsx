@@ -1,5 +1,6 @@
 import { Popover } from '@headlessui/react'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
+import { useTweets } from '../../hooks/useTweets'
 import Pill from '../Pill'
 import Transition from '../Transition'
 
@@ -14,21 +15,36 @@ interface Element {
 }
 
 const FilterList = ({ buttonName, list }: Props) => {
-  const [element, setElement] = useState<Element[]>(() =>
+  const { handleFilter } = useTweets()
+  const [elements, setElements] = useState<Element[]>(() =>
     list.map((item) => ({ status: false, name: item }))
   )
+
+  useEffect(() => {
+    const checkedElements: string[] = []
+
+    elements.forEach((item) => item.status && checkedElements.push(item.name))
+    if (elements.length === 0 || checkedElements.length === 0)
+      return handleFilter({ categories: [] })
+
+    handleFilter({ categories: checkedElements })
+  }, [elements])
+
+  useEffect(() => {
+    setElements(list.map((item) => ({ status: false, name: item })))
+  }, [list])
 
   const handleChange = (e: ChangeEvent<HTMLFormElement>) => {
     const { id } = e.target
 
-    const filterByElement = element.map((item) => {
+    const filterByElement = elements.map((item) => {
       if (item.name === id) {
         return { ...item, status: !item.status }
       }
       return item
     })
 
-    setElement(filterByElement)
+    setElements(filterByElement)
   }
 
   return (
@@ -44,31 +60,35 @@ const FilterList = ({ buttonName, list }: Props) => {
               onChange={handleChange}
               className="absolute left-0 z-20 w-56 p-2 mt-2 origin-top-left rounded-md shadow-2xl top-full bg-white/90 backdrop-blur shadow-slate-300 focus:outline-none"
             >
-              {element.map((category) => (
-                <div
-                  className="flex items-center gap-2 p-2 rounded-md hover:bg-slate-100/40"
-                  key={`optionbox-${category.name}`}
-                >
-                  <input
-                    className="accent-indigo-600"
-                    type="checkbox"
-                    checked={category.status}
-                    id={category.name}
-                  />
-                  <label
-                    className="w-full cursor-pointer"
-                    htmlFor={category.name}
+              {elements.length === 0 ? (
+                <p className="text-slate-600">No hay tags aún</p>
+              ) : (
+                elements.map((category) => (
+                  <div
+                    className="flex items-center gap-2 p-2 rounded-md hover:bg-slate-100/40"
+                    key={`optionbox-${category.name}`}
                   >
-                    {category.name}
-                  </label>
-                </div>
-              ))}
+                    <input
+                      className="accent-indigo-600"
+                      type="checkbox"
+                      checked={category.status}
+                      id={category.name}
+                    />
+                    <label
+                      className="w-full cursor-pointer"
+                      htmlFor={category.name}
+                    >
+                      {category.name}
+                    </label>
+                  </div>
+                ))
+              )}
             </Popover.Panel>
           </Transition>
         </>
       </Popover>
       <div className="flex flex-wrap items-center gap-2">
-        {element.map(
+        {elements.map(
           (item) =>
             item.status && (
               <Pill key={`filter-list-${item.name}`}>{item.name}</Pill>
