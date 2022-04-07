@@ -69,5 +69,5 @@ export interface IconPropsSVG {
 
 export interface IErrors {
   message: string | null
-  type: 'error' | null
+  type: 'error' | 'success' | 'info' | 'warning' | null
 }
