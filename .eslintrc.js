@@ -1,27 +1,17 @@
-const RULES = {
-  OFF: 'off',
-  WARN: 'warn',
-  ERROR: 'error',
-}
-
 module.exports = {
   env: {
     browser: true,
     es2021: true,
-    node: true,
+    node: true
   },
-  extends: ['plugin:react/recommended', 'standard', 'prettier'],
-  parser: '@typescript-eslint/parser',
+  extends: ['plugin:react/recommended', 'standard'],
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     },
-    ecmaVersion: 'latest',
-    sourceType: 'module',
+    ecmaVersion: 12,
+    sourceType: 'module'
   },
-  plugins: ['react', '@typescript-eslint'],
-  rules: {
-    'react/react-in-jsx-scope': RULES.OFF,
-    camelcase: RULES.OFF,
-  },
+  plugins: ['react'],
+  rules: {}
 }
