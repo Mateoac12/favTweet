@@ -4,9 +4,10 @@ import CategoryTag from '../CategoryTag'
 interface Props {
   categories: string[]
   setCategories: Dispatch<SetStateAction<string[]>>
+  removeCategory: (category: string) => void
 }
 
-const CategoriesTag = ({ categories, setCategories }: Props) => {
+const CategoriesTag = ({ categories, setCategories, removeCategory }: Props) => {
   return (
     <>
       {Boolean(categories.length) && (
@@ -14,6 +15,7 @@ const CategoriesTag = ({ categories, setCategories }: Props) => {
           {categories.map((category) => (
             <CategoryTag
               category={category}
+              removeCategory={removeCategory}
               setCategories={setCategories}
               key={`categorytag-${category}`}
             />

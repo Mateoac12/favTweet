@@ -12,7 +12,7 @@ interface Props {
 const CategoryInput = ({ existCategories = [] }: Props) => {
   const [input, setInput] = useState<string>('')
   const [categories, setCategories] = useState<string[]>([])
-  const { setCategory } = useTweet()
+  const { setCategory, removeCategory } = useTweet()
 
   const handleCategory = (str: string) => {
     const hasExist = categories.some(
@@ -63,7 +63,7 @@ const CategoryInput = ({ existCategories = [] }: Props) => {
           )}
         </>
       </div>
-      <CategoriesTag categories={categories} setCategories={setCategories} />
+      <CategoriesTag categories={categories} removeCategory={removeCategory} setCategories={setCategories} />
     </>
   )
 }

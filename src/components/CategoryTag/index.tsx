@@ -4,13 +4,15 @@ import CloseIcon from '../CloseIcon'
 interface Props {
   category: string
   setCategories: Dispatch<SetStateAction<string[]>>
+  removeCategory: (category: string) => void
 }
 
-const CategoryTag = ({ category, setCategories }: Props) => {
+const CategoryTag = ({ category, setCategories, removeCategory }: Props) => {
   const handleRemoveCategory = (category: string) => {
     setCategories((lastCategories) =>
       lastCategories.filter((c) => c !== category)
     )
+    removeCategory(category)
   }
 
   return (
