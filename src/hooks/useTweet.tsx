@@ -3,8 +3,10 @@ import { TweetContext } from '../context/TweetContext'
 import { postTweet } from '../services/getTweet'
 import { checkTweetLink } from '../utils/checkTweetLink'
 import { useError } from './useError'
+import { useTweets } from './useTweets'
 
 export const useTweet = () => {
+  const { tweets } = useTweets()
   const { tweet, setTweet } = useContext(TweetContext)
   const [input, setInput] = useState<string>('')
   const { error, setError, resetError } = useError()
@@ -16,11 +18,19 @@ export const useTweet = () => {
 
   const handleCheckLink = async (link: string) => {
     const { tweetId, pass, error } = checkTweetLink(link)
+    const hasExist = tweets!.find(t => t.tweetId === tweetId)
 
     if (!pass) {
       return setError({
         message: error,
         type: 'error',
+      })
+    }
+
+    if(hasExist) {
+      return setError({
+        message: `El tweet ya existe!`,
+        type: 'info',
       })
     }
 
@@ -42,6 +52,13 @@ export const useTweet = () => {
     }))
   }
 
+  const removeCategory = (category: string) => {
+    setTweet((lastTweets) => ({
+      ...lastTweets!,
+      category: lastTweets!.category!.filter((c) => c !== category),
+    }))
+  }
+
   const resetTweet = () => {
     setTweet(null)
   }
@@ -55,5 +72,6 @@ export const useTweet = () => {
     handleSetInput,
     handleCheckLink,
     setCategory,
+    removeCategory
   }
 }
