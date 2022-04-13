@@ -37,7 +37,7 @@ export interface ITweetAPI {
 }
 
 export interface ITargetTweet {
-  id: string
+  id?: string
   avatar: string
   name: string
   username: string
@@ -52,6 +52,7 @@ export interface ITargetTweet {
   createdAt: string
   notHover?: boolean
   category?: string[]
+  existCategories?: string[]
 }
 
 export interface IUserProfile {
