@@ -66,6 +66,7 @@ const Dashboard = () => {
               <TargetTweet
                 key={`target-dashboard-${tweet.tweetId}`}
                 {...tweet}
+                existCategories={categories}
               />
             )
           )}

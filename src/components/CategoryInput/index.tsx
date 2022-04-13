@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useTweet } from '../../hooks/useTweet'
+import { ITargetTweet } from '../../types'
 import { findWordInList } from '../../utils/findWordInList'
 import Button from '../Button'
 import CategoriesTag from '../CategoriesTag'
@@ -7,12 +8,18 @@ import PlusIcon from '../PlusIcon'
 
 interface Props {
   existCategories: string[]
+  addedTaargetCategories?: string[]
+  tweet?: ITargetTweet
 }
 
-const CategoryInput = ({ existCategories = [] }: Props) => {
+const CategoryInput = ({
+  existCategories = [],
+  addedTaargetCategories = [],
+  tweet,
+}: Props) => {
   const [input, setInput] = useState<string>('')
-  const [categories, setCategories] = useState<string[]>([])
-  const { setCategory, removeCategory } = useTweet()
+  const [categories, setCategories] = useState<string[]>(addedTaargetCategories)
+  const { setCategory, removeCategory, addShadowTweet } = useTweet()
 
   const handleCategory = (str: string) => {
     const hasExist = categories.some(
@@ -20,8 +27,8 @@ const CategoryInput = ({ existCategories = [] }: Props) => {
     )
 
     if (str.trim() === '' || hasExist) return
-
     setCategories((lastValues) => lastValues.concat(str))
+    tweet && addShadowTweet(tweet!)
     setCategory(categories.concat(str))
     setInput('')
   }
@@ -63,7 +70,12 @@ const CategoryInput = ({ existCategories = [] }: Props) => {
           )}
         </>
       </div>
-      <CategoriesTag categories={categories} removeCategory={removeCategory} setCategories={setCategories} />
+      <CategoriesTag
+        categories={categories}
+        removeCategory={removeCategory}
+        setCategories={setCategories}
+        tweet={tweet}
+      />
     </>
   )
 }

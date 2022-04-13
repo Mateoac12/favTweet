@@ -1,13 +1,20 @@
 import { Dispatch, SetStateAction } from 'react'
+import { ITargetTweet } from '../../types'
 import CategoryTag from '../CategoryTag'
 
 interface Props {
   categories: string[]
   setCategories: Dispatch<SetStateAction<string[]>>
   removeCategory: (category: string) => void
+  tweet?: ITargetTweet
 }
 
-const CategoriesTag = ({ categories, setCategories, removeCategory }: Props) => {
+const CategoriesTag = ({
+  categories,
+  setCategories,
+  removeCategory,
+  tweet,
+}: Props) => {
   return (
     <>
       {Boolean(categories.length) && (
@@ -18,6 +25,7 @@ const CategoriesTag = ({ categories, setCategories, removeCategory }: Props) => 
               removeCategory={removeCategory}
               setCategories={setCategories}
               key={`categorytag-${category}`}
+              tweet={tweet}
             />
           ))}
         </div>

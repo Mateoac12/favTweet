@@ -1,6 +1,7 @@
 import { ChangeEvent, useContext, useState } from 'react'
 import { TweetContext } from '../context/TweetContext'
 import { postTweet } from '../services/getTweet'
+import { ITargetTweet } from '../types'
 import { checkTweetLink } from '../utils/checkTweetLink'
 import { useError } from './useError'
 import { useTweets } from './useTweets'
@@ -18,7 +19,7 @@ export const useTweet = () => {
 
   const handleCheckLink = async (link: string) => {
     const { tweetId, pass, error } = checkTweetLink(link)
-    const hasExist = tweets!.find(t => t.tweetId === tweetId)
+    const hasExist = tweets!.find((t) => t.tweetId === tweetId)
 
     if (!pass) {
       return setError({
@@ -27,7 +28,7 @@ export const useTweet = () => {
       })
     }
 
-    if(hasExist) {
+    if (hasExist) {
       return setError({
         message: `El tweet ya existe!`,
         type: 'info',
@@ -41,6 +42,11 @@ export const useTweet = () => {
 
     setTweet(tweetData)
     tweetData && setIsLoading(false)
+  }
+
+  // necesario para cuando queremos modificar o eliminar categorias, sino el tweet es null y no tiene a que agregarle los nuevos valores
+  const addShadowTweet = (tweet: ITargetTweet | null) => {
+    setTweet(tweet)
   }
 
   const setCategory = (categoty: string[]) => {
@@ -72,6 +78,7 @@ export const useTweet = () => {
     handleSetInput,
     handleCheckLink,
     setCategory,
-    removeCategory
+    removeCategory,
+    addShadowTweet,
   }
 }

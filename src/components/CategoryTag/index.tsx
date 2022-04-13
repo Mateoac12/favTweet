@@ -1,17 +1,28 @@
 import { Dispatch, SetStateAction } from 'react'
+import { useTweet } from '../../hooks/useTweet'
+import { ITargetTweet } from '../../types'
 import CloseIcon from '../CloseIcon'
 
 interface Props {
   category: string
   setCategories: Dispatch<SetStateAction<string[]>>
   removeCategory: (category: string) => void
+  tweet?: ITargetTweet
 }
 
-const CategoryTag = ({ category, setCategories, removeCategory }: Props) => {
+const CategoryTag = ({
+  category,
+  setCategories,
+  removeCategory,
+  tweet,
+}: Props) => {
+  const { addShadowTweet } = useTweet()
+
   const handleRemoveCategory = (category: string) => {
-    setCategories((lastCategories) =>
-      lastCategories.filter((c) => c !== category)
-    )
+    tweet && addShadowTweet(tweet)
+    setCategories((lastCategories) => {
+      return lastCategories.filter((c) => c !== category)
+    })
     removeCategory(category)
   }
 
