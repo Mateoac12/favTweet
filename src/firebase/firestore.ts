@@ -4,6 +4,9 @@ import {
   addDoc,
   onSnapshot,
   Timestamp,
+  deleteDoc,
+  doc,
+  updateDoc,
 } from 'firebase/firestore'
 import { ITargetTweet, IUserProfile } from '../types'
 
@@ -24,9 +27,29 @@ const getTweets = (
   const collRef = collection(db, `${userId}`)
 
   onSnapshot(collRef, ({ docs }) => {
-    const results = docs.map((doc) => doc.data() as ITargetTweet)
+    const results = docs.map(
+      (doc) =>
+        ({
+          ...doc.data(),
+          id: doc.id,
+        } as ITargetTweet)
+    )
     callback(results)
   })
 }
 
-export { addTweet, getTweets }
+const deleteTweet = (userId: IUserProfile['uid'], id: ITargetTweet['id']) => {
+  const docRef = doc(db, `${userId}`, `${id}`)
+  deleteDoc(docRef).then((res) => console.log(res))
+}
+
+const updateCategories = (
+  userId: IUserProfile['uid'],
+  id: ITargetTweet['id'],
+  category: string[]
+) => {
+  const docRef = doc(db, `${userId}`, `${id}`)
+  updateDoc(docRef, { category }).then((res) => console.log(res))
+}
+
+export { addTweet, getTweets, deleteTweet, updateCategories }
