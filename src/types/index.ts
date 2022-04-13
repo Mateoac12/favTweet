@@ -37,6 +37,7 @@ export interface ITweetAPI {
 }
 
 export interface ITargetTweet {
+  id: string
   avatar: string
   name: string
   username: string
