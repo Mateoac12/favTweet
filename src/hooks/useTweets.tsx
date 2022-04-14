@@ -19,7 +19,7 @@ export const useTweets = () => {
   }
 
   useEffect(() => {
-    setFilteredTweets(tweets!)
+    tweets && setFilteredTweets(tweets)
   }, [tweets])
 
   return {

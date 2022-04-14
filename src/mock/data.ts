@@ -2,6 +2,7 @@ import { ITargetTweet } from '../types'
 
 export const tweets: ITargetTweet[] = [
   {
+    id: '1',
     avatar:
       'https://pbs.twimg.com/profile_images/1083714591752941568/Q7LnIANs_normal.jpg',
     name: 'Miguel Ángel Durán',
@@ -18,6 +19,7 @@ export const tweets: ITargetTweet[] = [
     tweetId: '1496146307219693573',
   },
   {
+    id: '2',
     avatar:
       'https://pbs.twimg.com/profile_images/1473432979867410441/CAFOg3DY_normal.jpg',
     name: 'Jorge Baumann.js',
@@ -34,6 +36,7 @@ export const tweets: ITargetTweet[] = [
     tweetId: '1504220139151110144',
   },
   {
+    id: '3',
     avatar:
       'https://pbs.twimg.com/profile_images/1486806973668544512/Zegglp6G_normal.jpg',
     name: 'Mateo 👨🏻‍💻',
@@ -49,6 +52,7 @@ export const tweets: ITargetTweet[] = [
     tweetId: '1490042400189956105',
   },
   {
+    id: '4',
     avatar:
       'https://pbs.twimg.com/profile_images/1485735728139100165/EaZ6h5xW_normal.jpg',
     name: 'goncy.tsx',
@@ -65,6 +69,7 @@ export const tweets: ITargetTweet[] = [
     tweetId: '1504864129114324995',
   },
   {
+    id: '5',
     avatar:
       'https://pbs.twimg.com/profile_images/1497556212006764544/z23kcB5A_normal.jpg',
     name: 'Brais Moure',

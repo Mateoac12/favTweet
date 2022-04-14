@@ -52,27 +52,29 @@ const TargetTweet = ({
         }`}
       >
         <div className="flex items-start justify-between">
-          <Popover className="relative order-1">
-            <Popover.Button className="p-1 text-xs rounded-full bg-white/80">
-              <MenuIcon />
-            </Popover.Button>
-            <Transition>
-              <Popover.Panel className="absolute origin-top-right right-0 z-10 flex flex-col items-end w-48 p-2  transform bg-white rounded-md top-[calc(100%_+_.5rem)] shadow-xl shadow-slate-200">
-                <button
-                  onClick={() => deleteTweet(user!.uid, id)}
-                  className="w-full p-2 text-lg text-right transition rounded-md text-slate-800 hover:bg-slate-50"
-                >
-                  Eliminar
-                </button>
-                <button
-                  onClick={() => setShowModal(true)}
-                  className="w-full p-2 text-lg text-right transition rounded-md text-slate-800 hover:bg-slate-50"
-                >
-                  Editar categorías
-                </button>
-              </Popover.Panel>
-            </Transition>
-          </Popover>
+          {user && (
+            <Popover className="relative order-1">
+              <Popover.Button className="p-1 text-xs rounded-full bg-white/80">
+                <MenuIcon />
+              </Popover.Button>
+              <Transition>
+                <Popover.Panel className="absolute origin-top-right right-0 z-10 flex flex-col items-end w-48 p-2  transform bg-white rounded-md top-[calc(100%_+_.5rem)] shadow-xl shadow-slate-200">
+                  <button
+                    onClick={() => deleteTweet(user!.uid, id)}
+                    className="w-full p-2 text-lg text-right transition rounded-md text-slate-800 hover:bg-slate-50"
+                  >
+                    Eliminar
+                  </button>
+                  <button
+                    onClick={() => setShowModal(true)}
+                    className="w-full p-2 text-lg text-right transition rounded-md text-slate-800 hover:bg-slate-50"
+                  >
+                    Editar categorías
+                  </button>
+                </Popover.Panel>
+              </Transition>
+            </Popover>
+          )}
           <figure className="flex items-start gap-2">
             <Avatar src={avatar} alt={username} />
             <figcaption>
@@ -108,68 +110,70 @@ const TargetTweet = ({
           </a>
         </div>
       </article>
-      <TransitionLibrary appear show={showModal} as={Fragment}>
-        <Dialog
-          as="div"
-          className="fixed z-10 block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-          onClose={() => setShowModal(false)}
-        >
-          <TransitionLibrary.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100 scale-100"
-            leaveTo="opacity-0 scale-95"
+      {user && (
+        <TransitionLibrary appear show={showModal} as={Fragment}>
+          <Dialog
+            as="div"
+            className="fixed z-10 block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            onClose={() => setShowModal(false)}
           >
-            <div className="max-w-md p-6 mx-auto bg-white shadow-xl rounded-2xl">
-              <Dialog.Title as="h3" className="text-2xl text-slate-800">
-                Lista de Categorías
-              </Dialog.Title>
-              <div className="mt-4">
-                <CategoryInput
-                  existCategories={existCategories!}
-                  addedTaargetCategories={category!}
-                  tweet={{
-                    id,
-                    avatar,
-                    name,
-                    username,
-                    verified,
-                    isProtect,
-                    description,
-                    followers,
-                    following,
-                    userId,
-                    tweetId,
-                    text,
-                    createdAt,
-                    category,
-                    notHover,
-                    existCategories,
-                  }}
-                />
-              </div>
+            <TransitionLibrary.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <div className="max-w-md p-6 mx-auto bg-white shadow-xl rounded-2xl">
+                <Dialog.Title as="h3" className="text-2xl text-slate-800">
+                  Lista de Categorías
+                </Dialog.Title>
+                <div className="mt-4">
+                  <CategoryInput
+                    existCategories={existCategories!}
+                    addedTaargetCategories={category!}
+                    tweet={{
+                      id,
+                      avatar,
+                      name,
+                      username,
+                      verified,
+                      isProtect,
+                      description,
+                      followers,
+                      following,
+                      userId,
+                      tweetId,
+                      text,
+                      createdAt,
+                      category,
+                      notHover,
+                      existCategories,
+                    }}
+                  />
+                </div>
 
-              <hr className="my-4" />
-              <div className="mt-4">
-                <Button
-                  px="px-2"
-                  onClick={() => {
-                    setShowModal(false)
-                    addShadowTweet(null)
-                    tweet?.category &&
-                      updateCategories(user!.uid, id, tweet?.category)
-                  }}
-                >
-                  Guardar cambios
-                </Button>
+                <hr className="my-4" />
+                <div className="mt-4">
+                  <Button
+                    px="px-2"
+                    onClick={() => {
+                      setShowModal(false)
+                      addShadowTweet(null)
+                      tweet?.category &&
+                        updateCategories(user!.uid, id, tweet?.category)
+                    }}
+                  >
+                    Guardar cambios
+                  </Button>
+                </div>
               </div>
-            </div>
-          </TransitionLibrary.Child>
-        </Dialog>
-      </TransitionLibrary>
+            </TransitionLibrary.Child>
+          </Dialog>
+        </TransitionLibrary>
+      )}
     </>
   )
 }
