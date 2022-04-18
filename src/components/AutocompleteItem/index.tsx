@@ -9,17 +9,18 @@ const AutocompleteItem = ({ name, username, text, avatar, tweetId }: Props) => {
     <a
       href={generateExternalTwitterLink({ username, tweetId })}
       target="_blank"
-      className="grid search-result-grid bg-transparent hover:bg-slate-200/40 transition-colors p-2 rounded-lg divide-x"
+      className="p-2 transition-colors bg-transparent rounded-lg lg:divide-x md:grid search-result-grid hover:bg-slate-200/40"
       rel="noreferrer"
     >
-      <div className="flex items-center gap-2 pr-2">
+      <div className="items-center hidden gap-2 md:pr-2 lg:flex">
         <Avatar src={avatar} alt={username + ' avatar'} />
         <div>
           <p className="text-xl">{name}</p>
           <p className="text-slate-600">@{username}</p>
         </div>
       </div>
-      <p className="p-2">{text}</p>
+      <p className="text-xl lg:hidden">{name}</p>
+      <p className="md:p-2">{text}</p>
     </a>
   )
 }

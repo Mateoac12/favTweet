@@ -3,7 +3,7 @@ import heartIcon from '../../assets/heart-illustration.png'
 
 const TwitterIllustrationHome = () => {
   return (
-    <div className="flex-1 items-center flex">
+    <div className="items-center flex-1 hidden xl:flex">
       <figure className="relative">
         <img className="drop-shadow-2xl" src={twitterIcon} />
         <img

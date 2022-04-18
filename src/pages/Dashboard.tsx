@@ -67,6 +67,7 @@ const Dashboard = () => {
                 key={`target-dashboard-${tweet.tweetId}`}
                 {...tweet}
                 existCategories={categories}
+                notHover={true}
               />
             )
           )}

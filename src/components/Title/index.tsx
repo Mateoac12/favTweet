@@ -15,7 +15,9 @@ interface Props {
 }
 
 const Title = ({ children, size = 'text-4xl' }: Props) => {
-  return <h1 className={`mb-4 font-semibold ${size}`}>{children}</h1>
+  return (
+    <h1 className={`mb-4 font-semibold text-4xl md:${size}`}>{children}</h1>
+  )
 }
 
 export default Title
