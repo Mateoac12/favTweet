@@ -37,10 +37,13 @@ const TargetTweet = ({
   category,
   notHover = false,
   existCategories,
+  isExample = false,
 }: ITargetTweet) => {
   const { user } = useHandleLogin()
   const { tweet, addShadowTweet } = useTweet()
   const [showModal, setShowModal] = useState<boolean>(false)
+
+  const falseClickOption = () => {}
 
   return (
     <>
@@ -60,13 +63,19 @@ const TargetTweet = ({
               <Transition>
                 <Popover.Panel className="absolute origin-top-right right-0 z-10 flex flex-col items-end w-48 p-2  transform bg-white rounded-md top-[calc(100%_+_.5rem)] shadow-xl shadow-slate-200">
                   <button
-                    onClick={() => deleteTweet(user!.uid, id)}
+                    onClick={
+                      isExample
+                        ? falseClickOption
+                        : () => deleteTweet(user!.uid, id)
+                    }
                     className="w-full p-2 text-lg text-right transition rounded-md text-slate-800 hover:bg-slate-50"
                   >
                     Eliminar
                   </button>
                   <button
-                    onClick={() => setShowModal(true)}
+                    onClick={
+                      isExample ? falseClickOption : () => setShowModal(true)
+                    }
                     className="w-full p-2 text-lg text-right transition rounded-md text-slate-800 hover:bg-slate-50"
                   >
                     Editar categorías

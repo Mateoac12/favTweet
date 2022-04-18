@@ -53,6 +53,7 @@ export interface ITargetTweet {
   notHover?: boolean
   category?: string[]
   existCategories?: string[]
+  isExample?: boolean
 }
 
 export interface IUserProfile {
