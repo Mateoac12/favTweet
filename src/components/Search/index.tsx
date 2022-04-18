@@ -29,12 +29,14 @@ const Search = ({ data, sourceSearchId }: Props) => {
             sourceId: sourceSearchId,
             getItems: ({ query }: { query: string }) => {
               if (query) {
-                return data.filter(
-                  ({ text, username, name }) =>
-                    text.toLowerCase().includes(query.toLowerCase()) ||
-                    username.toLowerCase().includes(query.toLowerCase()) ||
-                    name.toLowerCase().includes(query.toLowerCase())
-                )
+                return data
+                  .filter(
+                    ({ text, username, name }) =>
+                      text.toLowerCase().includes(query.toLowerCase()) ||
+                      username.toLowerCase().includes(query.toLowerCase()) ||
+                      name.toLowerCase().includes(query.toLowerCase())
+                  )
+                  .slice(0, 6)
               }
             },
           },
