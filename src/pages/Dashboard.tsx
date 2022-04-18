@@ -53,7 +53,7 @@ const Dashboard = () => {
 
   if (tweets!.length > 0)
     return (
-      <div className="max-w-screen-xl min-h-screen mx-auto mb-40 pt-28">
+      <div className="max-w-screen-xl min-h-screen px-2 mx-auto mb-40 md:px-0 pt-28">
         <h1 className="text-2xl text-slate-600">Busca tus tweets</h1>
         <Search data={tweets!} sourceSearchId="dashboard-tweets" />
         <div className="flex items-center justify-start gap-4 mb-4">
