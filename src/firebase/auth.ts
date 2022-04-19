@@ -4,7 +4,6 @@ import {
   getAuth,
   signOut as signOutFirebase,
   signInWithPopup,
-  User,
 } from 'firebase/auth'
 import { IUserProfile } from '../types'
 
@@ -19,7 +18,7 @@ const signOut = () => signOutFirebase(auth)
 const onAuthStateChanged = (onChange: (value: IUserProfile | null) => void) =>
   auth.onAuthStateChanged((user) => onChange(getUserData(user!) || null))
 
-function getUserData(user: User | null): IUserProfile | null {
+function getUserData(user: any): IUserProfile | null {
   if (!user) return null
 
   const { displayName, photoURL, uid, accessToken } = user
