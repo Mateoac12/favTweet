@@ -2,7 +2,7 @@ import Circles from './components/Circles'
 import Header from './components/Header'
 import TweetProvider from './context/TweetContext'
 import UserProvider from './context/UserContext'
-import { Routes } from './routes/index.routes'
+import { Routes } from './routes/Routes'
 
 function App() {
   return (
