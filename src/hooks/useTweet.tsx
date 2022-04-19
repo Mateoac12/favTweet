@@ -38,10 +38,17 @@ export const useTweet = () => {
     resetError()
 
     setIsLoading(true)
-    const { tweetData } = await postTweet({ tweetId } as { tweetId: string })
-
-    setTweet(tweetData)
-    tweetData && setIsLoading(false)
+    try {
+      const { tweetData } = await postTweet({ tweetId } as { tweetId: string })
+      setTweet(tweetData)
+      tweetData && setIsLoading(false)
+    } catch (err) {
+      setIsLoading(false)
+      setError({
+        message: `El tweet no puede ser privado`,
+        type: 'error',
+      })
+    }
   }
 
   // necesario para cuando queremos modificar o eliminar categorias, sino el tweet es null y no tiene a que agregarle los nuevos valores
