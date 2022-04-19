@@ -35,7 +35,7 @@ const Dashboard = () => {
   if (loader)
     return (
       <div className="max-w-screen-xl min-h-screen mx-auto mb-40 pt-28">
-        <div className="flex flex-col gap-4">
+        <div className="flex-col hidden gap-4 md:flex">
           <Placeholder id="text-search" w={200} h={28} />
           <Placeholder id="search" w={1200} h={38} />
         </div>
@@ -43,7 +43,7 @@ const Dashboard = () => {
           <Placeholder id="text-category" w={80} h={28} />
           <Placeholder id="category" w={100} h={28} />
         </div>
-        <div className="flex gap-4 mt-8">
+        <div className="flex-col hidden gap-4 mt-8 md:flex lg:flex-row">
           <Placeholder id="tweet-target-1" w={400} h={320} rounded={'md'} />
           <Placeholder id="tweet-target-2" w={460} h={260} rounded={'md'} />
           <Placeholder id="tweet-target-3" w={300} h={340} rounded={'md'} />
