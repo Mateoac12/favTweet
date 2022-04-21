@@ -1,6 +1,12 @@
 export const getDateFormat = (date: string): string => {
   const formated = new Intl.DateTimeFormat('es')
-  const dateFormat = formated.format(new Date(date))
 
-  return dateFormat
+  try {
+    const dateParsed = new Date(date)
+    const dateFormat = formated.format(dateParsed)
+
+    return dateFormat
+  } catch (err: any) {
+    return err.message
+  }
 }
