@@ -1,6 +1,6 @@
 const standardTweetLink = {
   origin: 'https://twitter.com',
-  pathname: /(\w)\/status\/[0-9]+/g, // /{username}/status/{number}
+  pathname: /(\w+)\/status\/[0-9]+/g, // /{username}/status/{number}
 }
 
 export const checkTweetLink = (link: string) => {
@@ -21,7 +21,7 @@ export const checkTweetLink = (link: string) => {
       ? [true, null]
       : [
           false,
-          'Debe ser una URL de un tweet. Ejemplo: https://twitter.com/twitter/status/123456',
+          'Debe ser una URL de un tweet. Ejemplo: https://twitter.com/username/status/123456',
         ]
 
     return {
