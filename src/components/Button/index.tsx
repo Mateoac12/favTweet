@@ -1,5 +1,5 @@
 interface Props {
-  children?: Element | Element[] | string
+  children?: Element | Element[] | string | JSX.Element
   onClick?: () => void
   type?: 'primary' | 'secondary' | 'twitter'
   size?: 'text-xs' | 'text-sm' | 'text-lg' | 'text-xl' | 'text-2xl'
@@ -27,9 +27,8 @@ const Button = ({
 }: Props) => {
   return (
     <button
-      className={`${px} py-2 inline rounded-lg w-max hover:brightness-105 hover:ring-4 transition ${
-        type ? buttonType[type] : ''
-      } ${size} ${extraClasses}`}
+      className={`${px} py-2 inline rounded-lg w-max hover:brightness-105 hover:ring-4 transition ${type ? buttonType[type] : ''
+        } ${size} ${extraClasses}`}
       onClick={onClick}
     >
       {icon && icon}
