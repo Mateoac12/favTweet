@@ -10,7 +10,7 @@ import { useHandleLogin } from '../hooks/useHandleLogin'
 import { categoryTweet, tweets } from '../mock/data'
 
 const LandingPage = () => {
-  const { user } = useHandleLogin()
+  const { user, handleLogin } = useHandleLogin()
   const [, setLocation] = useLocation()
 
   return (
@@ -34,9 +34,11 @@ const LandingPage = () => {
               </Button>
             ) : (
               <>
-                <Button size="text-2xl">Empezar</Button>
+                <Button size="text-2xl" onClick={handleLogin}>Empezar</Button>
                 <Button size="text-2xl" type="secondary">
-                  Información
+                  <a href='#description-section'>
+                    Información
+                  </a>
                 </Button>
               </>
             )}
@@ -45,7 +47,7 @@ const LandingPage = () => {
         <TwitterIllustrationHome />
       </section>
       <section className="p-8 my-12 rounded-lg shadow-2xl bg-white/20 shadow-indigo-50">
-        <Title size="text-6xl">
+        <Title id="description-section" size="text-6xl">
           Conserva tus <Underline color="indigo">tweets</Underline>
         </Title>
         <Search data={tweets} sourceSearchId="landing-page-example" />
@@ -79,8 +81,8 @@ const LandingPage = () => {
                 'Luces',
                 'Restaurantes',
               ]}
-              removeCategory={() => {}}
-              setCategories={() => {}}
+              removeCategory={() => { }}
+              setCategories={() => { }}
             />
           </div>
           <div className="mt-12 md:mt-0 md:mx-auto">
